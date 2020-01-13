@@ -1,7 +1,5 @@
-package com.example.demo.controller;
+package com.example.demo.tryString;
 
-import com.example.demo.model.Employee;
-import com.example.demo.model.SampleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
