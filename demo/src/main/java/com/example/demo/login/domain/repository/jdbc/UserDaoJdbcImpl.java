@@ -13,7 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("UserDaoJdbcImpl")
 public class UserDaoJdbcImpl implements UserDao {
     @Autowired
     JdbcTemplate jdbc;
@@ -90,6 +90,10 @@ public class UserDaoJdbcImpl implements UserDao {
                         + " marriage = ?" + " WHERE user_id = ?",
                 user.getPassword(), user.getUserName(), user.getBirthday(), user.getAge(), user.isMarriage(),
                 user.getUserId());
+        // トランザクション確認のため、わざと例外をthrowする
+        // if (rowNumber > 0) {
+        //     throw new DataAccessException("トランザクションテスト"){};
+        // }
         return rowNumber;
     }
 
@@ -104,5 +108,11 @@ public class UserDaoJdbcImpl implements UserDao {
     // Userテーブルの全データをCSVに出力する
     @Override
     public void userCsvOut() throws DataAccessException {
+        // M_USERテーブルのデータを全件取得するSQL
+        String sql = "SELECT * FROM m_user";
+        // ResultSetExtractorの生成
+        UserRowCallbackHandler handler = new UserRowCallbackHandler();
+        // SQL実行&CSV出力
+        jdbc.query(sql, handler);
     }
 }
