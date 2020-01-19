@@ -3,7 +3,6 @@ package com.example.demo.login.domain.service.mybatis;
 import java.util.List;
 
 import com.example.demo.login.domain.model.User;
-import com.example.demo.login.domain.repository.mybatis.UserMapper;
 import com.example.demo.login.domain.repository.mybatis.UserMapper2;
 import com.example.demo.login.domain.service.RestService;
 
